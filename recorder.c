@@ -121,11 +121,11 @@ static inline void pattern_free(pattern_t *re)
 //
 // ============================================================================
 
-size_t    recorder_chan_write(recorder_chan_p chan, const void *ptr, size_t cnt);
-size_t    recorder_chan_writable(recorder_chan_p chan);
-ringidx_t recorder_chan_writer(recorder_chan_p chan);
-ringidx_t recorder_chan_reader(recorder_chan_p chan);
-size_t    recorder_chan_item_size(recorder_chan_p chan);
+static size_t    recorder_chan_write(recorder_chan_p chan, const void *ptr, size_t cnt);
+static size_t    recorder_chan_writable(recorder_chan_p chan);
+static ringidx_t recorder_chan_writer(recorder_chan_p chan);
+static ringidx_t recorder_chan_reader(recorder_chan_p chan);
+static size_t    recorder_chan_item_size(recorder_chan_p chan);
 
 
 // ============================================================================
@@ -430,13 +430,13 @@ ringidx_t recorder_append_fast3(recorder_info *rec,
 /// Global counter indicating the order of entries across recorders.
 uintptr_t       recorder_order   = 0;
 
-unsigned        recorder_dumping = 0;
+static unsigned        recorder_dumping = 0;
 
 /// List of the currently active flight recorders (ring buffers)
-recorder_info * recorders        = NULL;
+static recorder_info * recorders        = NULL;
 
 /// List of the currently active tweaks
-recorder_tweak *tweaks           = NULL;
+static recorder_tweak *tweaks           = NULL;
 
 
 RECORDER(recorders,             32, "Activation of recorders");
@@ -1276,7 +1276,7 @@ void recorder_chan_delete(recorder_chan_p chan)
 }
 
 
-size_t recorder_chan_write(recorder_chan_p chan, const void *ptr, size_t count)
+static size_t recorder_chan_write(recorder_chan_p chan, const void *ptr, size_t count)
 // ----------------------------------------------------------------------------
 //   Write some data in the recorder_chan
 // ----------------------------------------------------------------------------
@@ -1286,7 +1286,7 @@ size_t recorder_chan_write(recorder_chan_p chan, const void *ptr, size_t count)
 }
 
 
-size_t recorder_chan_writable(recorder_chan_p chan)
+static size_t recorder_chan_writable(recorder_chan_p chan)
 // ----------------------------------------------------------------------------
 //    Return number of items that can be written in ring
 // ----------------------------------------------------------------------------
@@ -1296,7 +1296,7 @@ size_t recorder_chan_writable(recorder_chan_p chan)
 }
 
 
-ringidx_t recorder_chan_writer(recorder_chan_p chan)
+static ringidx_t recorder_chan_writer(recorder_chan_p chan)
 // ----------------------------------------------------------------------------
 //    Return current writer index
 // ----------------------------------------------------------------------------
@@ -1553,7 +1553,7 @@ size_t recorder_chan_size(recorder_chan_p chan)
 }
 
 
-size_t recorder_chan_item_size(recorder_chan_p chan)
+static size_t recorder_chan_item_size(recorder_chan_p chan)
 // ----------------------------------------------------------------------------
 //   Return the ring item size for a given recorder_chan
 // ----------------------------------------------------------------------------
@@ -1589,7 +1589,7 @@ size_t recorder_chan_read(recorder_chan_p chan,
 }
 
 
-ringidx_t recorder_chan_reader(recorder_chan_p chan)
+static ringidx_t recorder_chan_reader(recorder_chan_p chan)
 // ----------------------------------------------------------------------------
 //   Return current reader index for recorder_chan
 // ----------------------------------------------------------------------------
