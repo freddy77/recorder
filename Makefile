@@ -64,6 +64,6 @@ scope: scope/Makefile
 scope: .ALWAYS
 	cd scope && make
 scope/Makefile:
-	cd scope && qmake
+	cd scope && qmake-qt5
 .install: $(DO_INSTALL=scope/recorder_scope.$(DO_INSTALL)_exe)
 scope/recorder_scope.$(DO_INSTALL)_exe: scope
