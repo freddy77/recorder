@@ -1672,6 +1672,7 @@ static recorder_type recorder_type_from_format(const char *format,
         {
             if (!index)
             {
+                // TODO recursion
                 record(recorders, "Export type at index %u in %s is %u",
                        start_index, start_format, result);
                 return result;
@@ -2039,6 +2040,8 @@ void recorder_trace_entry(recorder_info *info, recorder_entry *entry)
             size_t           size   = ring->size;
             recorder_type    none   = RECORDER_NONE;
 
+            // TODO recursion
+            // record -> record_append -> recorder_trace_entry (if trace enabled) -> record(recorders) (if trace == RECORDER_CHAN_MAGIC which means exported)
             record(recorders, "Channel #%u '%+s' type %u %+s",
                    i,
                    (const char *) shan + shan->name,
